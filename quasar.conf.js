@@ -15,12 +15,12 @@ module.exports = configure((/* ctx */) => ({
   // https://v1.quasar.dev/quasar-cli/supporting-ts
   supportTS: {
     tsCheckerConfig: {
-      eslint: true,
+      eslint: false,
     },
   },
 
   // https://v1.quasar.dev/quasar-cli/prefetch-feature
-  // preFetch: true,
+  preFetch: true,
 
   // app boot file (/src/boot)
   // --> boot files are part of "main.js"
@@ -38,12 +38,12 @@ module.exports = configure((/* ctx */) => ({
 
   // https://github.com/quasarframework/quasar/tree/dev/extras
   extras: [
-    // 'ionicons-v4',
-    // 'mdi-v5',
-    // 'fontawesome-v5',
-    // 'eva-icons',
-    // 'themify',
-    // 'line-awesome',
+    'ionicons-v4',
+    'mdi-v5',
+    'fontawesome-v5',
+    'eva-icons',
+    'themify',
+    'line-awesome',
     // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
     'roboto-font', // optional, you are not bound to it
@@ -52,7 +52,7 @@ module.exports = configure((/* ctx */) => ({
 
   // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
   build: {
-    vueRouterMode: 'hash', // available values: 'hash', 'history'
+    vueRouterMode: 'history', // available values: 'hash', 'history'
 
     // transpile: false,
 
@@ -66,15 +66,35 @@ module.exports = configure((/* ctx */) => ({
     // showProgress: false,
     // gzip: true,
     // analyze: true,
+    // publicPath: '/static/',
+    
+    //distDir: 'dis/spa/',
+
+    uglifyOptions: {
+      compress: false,
+      mangle: false, // Note `mangle.properties` is `false` by default.
+    },
+
+    extendWebpack (cfg, { isServer, isClient }) {
+      /*cfg.module.rules.push({
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /(node_modules|quasar)/ 
+      }),*/
+      cfg.optimization.minimize = false,
+      cfg.optimization.minimizer = []
+      cfg.plugins[9].options.minify = false
+    },
 
     // Options below are automatically set depending on the env, set them if you want to override
     // extractCSS: false,
 
     // https://v1.quasar.dev/quasar-cli/handling-webpack
     // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-    chainWebpack(/* chain */) {
-      //
-    },
+    chainWebpack(/*chain*/) {
+        // do something
+    }
   },
 
   // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
@@ -88,7 +108,6 @@ module.exports = configure((/* ctx */) => ({
   framework: {
     iconSet: 'material-icons', // Quasar icon set
     lang: 'en-us', // Quasar language pack
-    config: {},
 
     // Possible values for "importStrategy":
     // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -103,7 +122,18 @@ module.exports = configure((/* ctx */) => ({
     // directives: [],
 
     // Quasar plugins
-    plugins: [],
+    plugins: [
+      'Cookies',
+      'Notify',
+      'LoadingBar',
+    ],
+    config: {
+      loadingBar: {
+        color: 'red',
+        size: '4px',
+        position: 'top',
+      },
+    },
   },
 
   // animations: 'all', // --- includes all animations
