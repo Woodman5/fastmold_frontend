@@ -11,7 +11,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { configure } = require('quasar/wrappers');
 
-module.exports = configure((/* ctx */) => ({
+module.exports = configure((ctx) => ({
   // https://v1.quasar.dev/quasar-cli/supporting-ts
   supportTS: {
     tsCheckerConfig: {
@@ -66,8 +66,8 @@ module.exports = configure((/* ctx */) => ({
     // showProgress: false,
     // gzip: true,
     // analyze: true,
-    // publicPath: '/static/',
-    
+    publicPath: '/static/',
+
     //distDir: 'dis/spa/',
 
     uglifyOptions: {
@@ -80,11 +80,14 @@ module.exports = configure((/* ctx */) => ({
         enforce: 'pre',
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
-        exclude: /(node_modules|quasar)/ 
+        exclude: /(node_modules|quasar)/
       }),*/
-      cfg.optimization.minimize = false,
-      cfg.optimization.minimizer = []
-      cfg.plugins[9].options.minify = false
+      if (ctx.prod === true) {
+        cfg.optimization.minimize = false
+        cfg.optimization.minimizer = []
+        cfg.plugins[9].options.minify = false
+      }
+
     },
 
     // Options below are automatically set depending on the env, set them if you want to override
