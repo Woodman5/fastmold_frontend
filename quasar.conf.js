@@ -66,9 +66,9 @@ module.exports = configure((ctx) => ({
     // showProgress: false,
     // gzip: true,
     // analyze: true,
-    publicPath: '/static/',
+    // publicPath: '/static/',
 
-    //distDir: 'dis/spa/',
+    // distDir: 'dis/spa/',
 
     uglifyOptions: {
       compress: false,

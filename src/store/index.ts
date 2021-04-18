@@ -1,5 +1,8 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
+import ads from "src/store/ads/ads";
+import user from "src/store/user/user";
+import shared from "src/store/shared/shared";
 
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state';
@@ -21,7 +24,9 @@ export default store(({ Vue }) => {
 
   const Store = new Vuex.Store<StateInterface>({
     modules: {
-      // example
+      ads,
+      user,
+      shared,
     },
 
     // enable strict mode (adds overhead!)

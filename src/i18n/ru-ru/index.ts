@@ -20,4 +20,5 @@ export default {
   'Create account': 'Зарегистрироваться',
   'Login': 'Войти',
   'Registration': 'Регистрация',
+  'Materials': 'Материалы'
 }
