@@ -12,17 +12,21 @@ import shared from "src/store/shared/shared";
  * directly export the Store instantiation
  */
 
-export interface StateInterface {
+export interface RootState {
   // Define your own store structure, using submodules if needed
   // example: ExampleStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  example: unknown;
+  // example: unknown;
+  version?: string;
 }
 
 export default store(({ Vue }) => {
   Vue.use(Vuex);
 
-  const Store = new Vuex.Store<StateInterface>({
+  const Store = new Vuex.Store<RootState>({
+    state: {
+      version: '1.0.0' // a simple property
+    },
     modules: {
       ads,
       user,
