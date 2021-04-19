@@ -1,12 +1,15 @@
 import axios from 'axios'
 import { Cookies } from 'quasar'
 import * as types from '../mutation-types'
+import * as models from '../data_models'
+
+let mainpath = 'http://localhost:9000'
 
 export default {
 
   state: {
-    user: null,
-    prefetch: false,
+    user: null as (null | models.User),
+    prefetch: false as boolean,
   },
 
   mutations: {
@@ -16,7 +19,7 @@ export default {
       // console.log('Mutation - Delete User')
     },
 
-    [types.UPDATE_USER](state, user) {
+    [types.UPDATE_USER](state, user: models.User) {
       state.user = user
       // console.log('Mutation - Update User')
       // console.log('From Mutation - User:', state.user)
@@ -56,8 +59,9 @@ export default {
       commit(types.CLEAR_ERROR)
       commit(types.SET_LOADING, true)
       try {
-        await axios.post('/auth/login/', form, {
-          headers: {'X-CSRFTOKEN': Cookies.get('csrftoken')}
+        await axios.post(mainpath + '/api/v1/auth/login', form, {
+          headers: {'X-CSRFTOKEN': Cookies.get('csrftoken')},
+          withCredentials: true,
         })
           .then(response => {
             commit(types.UPDATE_USER, response.data)

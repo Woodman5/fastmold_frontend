@@ -66,7 +66,7 @@ module.exports = configure((ctx) => ({
     // showProgress: false,
     // gzip: true,
     // analyze: true,
-    // publicPath: '/static/',
+    // publicPath: 'http://localhost:9000',
 
     // distDir: 'dis/spa/',
 
