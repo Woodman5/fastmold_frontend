@@ -141,6 +141,11 @@
 
 
     <q-page-container>
+      <h4>text: {{ text }}</h4>
+      <q-btn class="gt-sm" flat
+             @click="text = getInfo"
+             label="click">
+      </q-btn>
       <router-view></router-view>
     </q-page-container>
 
@@ -148,11 +153,14 @@
   </q-layout>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import Vue from 'vue';
+
+  export default Vue.extend({
     data: function () {
       return {
         left: false,
+        text: 'test',
         langs: [
           { value: 'en-us', label: 'En', name: 'English' },
           { value: 'ru-ru', label: 'Ru', name: 'Русский' },
@@ -180,15 +188,29 @@
         return value.charAt(0).toUpperCase()
       }
     },
+    created() {
+      console.log('state = ', this.$store.state);
+    },
+    mounted(): void {
+      console.log('mounted prefetch =', this.$store.getters.getTestInfo);
+    },
     computed: {
       langLabel() {
         return this.langs.find(lang => lang.value === this.$i18n.locale).label
       },
       user() {
-        return this.$store.getters.user
+        return this.$store.getters.user;
       },
       isUserLoggedIn() {
-        return this.$store.getters.check
+        console.log('check =', this.$store.getters.check);
+        console.log('check2 =', this.$store);
+        return this.$store.getters.check;
+      },
+      getInfo: {
+        get (): string {
+          console.log('prefetch =', this.$store.getters.getTestInfo);
+          return this.$store.getters.getTestInfo;
+        }
       },
       links() {
         if (this.isUserLoggedIn) {
@@ -206,7 +228,7 @@
         ]
       }
     }
-  }
+  })
 </script>
 
 <style scoped>

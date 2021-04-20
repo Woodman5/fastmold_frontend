@@ -1,24 +1,18 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
-import ads from "src/store/ads/ads";
-import user from "src/store/user/user";
-import shared from "src/store/shared/shared";
+import { RootState } from './types';
+import ads from './ads/ads';
+import shared from './shared/shared';
+import { userProfile } from './user/index';
 
 // import example from './module-example';
-// import { ExampleStateInterface } from './module-example/state';
+// import { ExampleStateInterface } from './module-example/state.ts';
 
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation
  */
 
-export interface RootState {
-  // Define your own store structure, using submodules if needed
-  // example: ExampleStateInterface;
-  // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
-  // example: unknown;
-  version?: string;
-}
 
 export default store(({ Vue }) => {
   Vue.use(Vuex);
@@ -29,7 +23,7 @@ export default store(({ Vue }) => {
     },
     modules: {
       ads,
-      user,
+      userProfile,
       shared,
     },
 
@@ -37,6 +31,6 @@ export default store(({ Vue }) => {
     // for dev mode only
     strict: !!process.env.DEBUGGING,
   });
-
   return Store;
 });
+

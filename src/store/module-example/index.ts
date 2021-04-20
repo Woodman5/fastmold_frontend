@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { RootState } from '../index';
+import { RootState } from '../types';
 import state, { ExampleStateInterface } from './state';
 import actions from './actions';
 import getters from './getters';

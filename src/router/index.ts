@@ -1,7 +1,7 @@
 import { route } from 'quasar/wrappers';
 import VueRouter from 'vue-router';
 import { Store } from 'vuex';
-import { RootState } from '../store';
+import { RootState } from '../store/types';
 import routes from './routes';
 
 /*
