@@ -21,5 +21,7 @@ export default {
   'Login': 'Войти',
   'Registration': 'Регистрация',
   'Materials': 'Материалы',
-  'Сolors': 'Цвета'
+  color: 'Цвет | Цвета | Цветов',
+  grid: 'Сетка | Сетки',
+  list: 'Список | Списки'
 }

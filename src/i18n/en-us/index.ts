@@ -24,5 +24,7 @@ export default {
   'Login': 'Login',
   'Registration': 'Registration',
   'Materials': 'Materials',
-  'Сolors': 'Colors'
+  color: 'Color | Colors | Colors',
+  grid: 'Grid | Grids',
+  list: 'List | Lists'
 };
