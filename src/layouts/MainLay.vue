@@ -141,11 +141,6 @@
 
 
     <q-page-container>
-      <h4>text: {{ text }}</h4>
-      <q-btn class="gt-sm" flat
-             @click="text = getInfo"
-             label="click">
-      </q-btn>
       <router-view></router-view>
     </q-page-container>
 
@@ -155,6 +150,8 @@
 
 <script lang="ts">
   import Vue from 'vue';
+  import { mapGetters } from 'vuex'
+  // import { User } from 'src/store/user/types'
 
   export default Vue.extend({
     data: function () {
@@ -168,50 +165,53 @@
       }
     },
     methods: {
-      gotourl(url) {
+      gotourl(url: string) {
         document.location.href = url;
       },
-      changeLang(lang) {
+      changeLang(lang: string) {
         this.$i18n.locale = lang
       },
-      onLogout() {
-        this.$store.dispatch('logout')
+      async onLogout() {
+        await this.$store.dispatch('logout').catch(error => console.log(error))
         if (this.$route.name !== 'home'){
-          this.$router.push({name: 'home'})
+          this.$router.push({name: 'home'}).catch(error => console.log(error))
         }
       }
     },
     filters: {
-      first: function (value) {
+      first: function (value: string) {
         if (!value) return ''
         value = value.toString()
         return value.charAt(0).toUpperCase()
       }
     },
-    created() {
-      console.log('state = ', this.$store.state);
-    },
-    mounted(): void {
-      console.log('mounted prefetch =', this.$store.getters.getTestInfo);
-    },
     computed: {
-      langLabel() {
-        return this.langs.find(lang => lang.value === this.$i18n.locale).label
+      ...mapGetters({
+        getInfo: 'userProfile/getTestInfo',
+        user: 'userProfile/user',
+        isUserLoggedIn: 'userProfile/check'
+      }),
+      langLabel() : string {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        return this.langs.find(lang => lang.value === this.$i18n.locale)!.label
       },
-      user() {
-        return this.$store.getters.user;
-      },
-      isUserLoggedIn() {
-        console.log('check =', this.$store.getters.check);
-        console.log('check2 =', this.$store);
-        return this.$store.getters.check;
-      },
-      getInfo: {
-        get (): string {
-          console.log('prefetch =', this.$store.getters.getTestInfo);
-          return this.$store.getters.getTestInfo;
-        }
-      },
+      // user() : User | null {
+      //   return this.$store.getters['userProfile/user'];
+      // },
+      // isUserLoggedIn() : boolean {
+      //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      //   console.log('check =', this.$store.getters['userProfile/check']);
+      //   console.log('check2 =', this.$store);
+      //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      //   return this.$store.getters['userProfile/check'];
+      // },
+      // getInfo: {
+      //   get (): string {
+      //     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      //     console.log('prefetch =', this.$store.getters['userProfile/getTestInfo']);
+      //     return this.$store.getters['userProfile/getTestInfo'];
+      //   }
+      // },
       links() {
         if (this.isUserLoggedIn) {
           return [

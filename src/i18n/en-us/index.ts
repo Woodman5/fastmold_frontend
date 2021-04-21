@@ -23,5 +23,6 @@ export default {
   'Create account': 'Create account',
   'Login': 'Login',
   'Registration': 'Registration',
-  'Materials': 'Materials'
+  'Materials': 'Materials',
+  'Сolors': 'Colors'
 };
