@@ -2118,6 +2118,62 @@ function colors() {
             "hex_code": "#FDF4E3",
             "rgb_code": "253 244 227",
             "id": 245
+        },
+        {
+            "name": "NCS S 0300-N",
+            "slug": "ncs-s-0300-n",
+            "color_type": "ncs",
+            "hex_code": "#FFFFFF",
+            "rgb_code": "255 255 255",
+            "id": 246
+        },
+        {
+            "name": "NCS S 0500-N",
+            "slug": "ncs-s-0500-n",
+            "color_type": "ncs",
+            "hex_code": "#FCFCFB",
+            "rgb_code": "252 252 251",
+            "id": 247
+        },
+        {
+            "name": "NCS S 1000-N",
+            "slug": "ncs-s-1000-n",
+            "color_type": "ncs",
+            "hex_code": "#F2F2F0",
+            "rgb_code": "242 242 240",
+            "id": 248
+        },
+        {
+            "name": "NCS S 1005-R60B",
+            "slug": "ncs-s-1005-r60b",
+            "color_type": "ncs",
+            "hex_code": "#ECEBF0",
+            "rgb_code": "236 235 240",
+            "id": 249
+        },
+        {
+            "name": "NCS S 8010-B90G",
+            "slug": "ncs-s-8010-b90g",
+            "color_type": "ncs",
+            "hex_code": "#0C2517",
+            "rgb_code": "12 37 23",
+            "id": 250
+        },
+        {
+            "name": "NCS S 1510-G40Y",
+            "slug": "ncs-s-1510-g40y",
+            "color_type": "ncs",
+            "hex_code": "#D6DFC0",
+            "rgb_code": "214 223 192",
+            "id": 251
+        },
+        {
+            "name": "NCS S 7010-Y70R",
+            "slug": "ncs-s-7010-y70r",
+            "color_type": "ncs",
+            "hex_code": "#4F342A",
+            "rgb_code": "79 52 42",
+            "id": 252
         }
     ]
 }
