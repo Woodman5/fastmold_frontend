@@ -26,5 +26,6 @@ export default {
   'Materials': 'Materials',
   color: 'Color | Colors | Colors',
   grid: 'Grid | Grids',
-  list: 'List | Lists'
+  list: 'List | Lists',
+  simpleColors: 'Common colors'
 };

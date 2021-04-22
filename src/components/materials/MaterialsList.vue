@@ -1,35 +1,116 @@
 <template>
   <q-page padding>
-      <div class="column items-center">
-      <div class='col-12'>
-      <h4>{{ $tc('color', 1) }}</h4>
+<div class="q-pa-md" style="max-width: 800px">
+    <q-card>
+      <q-tabs
+        v-model="tab"
+
+        class="text-grey-8 nunito-font"
+        active-color="primary"
+        indicator-color="amber"
+        align="justify"
+      >
+        <q-tab name="simple" :label="$t('simpleColors')" class="my-label" />
+        <q-tab name="ral" label="RAL" class="my-label" />
+        <q-tab name="ral" label="NCS" class="my-label" />
+      </q-tabs>
+
+      <q-separator />
+
+      <q-tab-panels v-model="tab" animated>
+        <q-tab-panel name="mails" class="q-pa-none">
+
+          <q-splitter
+            v-model="splitterModel"
+            style="height: 250px"
+          >
+
+            <template v-slot:before>
+              <q-tabs
+                v-model="innerTab"
+                vertical
+                class="text-teal"
+              >
+                <q-tab name="innerMails" icon="mail" label="Mails" />
+                <q-tab name="innerAlarms" icon="alarm" label="Alarms" />
+                <q-tab name="innerMovies" icon="movie" label="Movies" />
+              </q-tabs>
+            </template>
+
+            <template v-slot:after>
+              <q-tab-panels
+                v-model="innerTab"
+                animated
+                transition-prev="slide-down"
+                transition-next="slide-up"
+              >
+                <q-tab-panel name="innerMails">
+                  <div class="text-h4 q-mb-md">Mails</div>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </q-tab-panel>
+
+                <q-tab-panel name="innerAlarms">
+                  <div class="text-h4 q-mb-md">Alarms</div>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </q-tab-panel>
+
+                <q-tab-panel name="innerMovies">
+                  <div class="text-h4 q-mb-md">Movies</div>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                </q-tab-panel>
+              </q-tab-panels>
+            </template>
+
+          </q-splitter>
+        </q-tab-panel>
+
+        <q-tab-panel name="alarms">
+          <div class="text-h6">Alarms</div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </q-tab-panel>
+
+      </q-tab-panels>
+    </q-card>
+  </div>
+
+      <div class="q-pa-md">
+
+        <div class='row justify-center'>
+          <div class="col-10 q-pa-sm q-ma-sm ">
+            <h5>{{ $tc('color', 1) }}</h5>
+          </div>
 
 
-        <div class="row no-wrap items-center">
-
-          <q-space />
-
-          <div style="width: 5rem;" class="text-right q-px-xs">{{ toggleText() }}</div>
-          <q-toggle
-            v-model="grid"
-            keep-color
-            color="amber-3"
-          />
+        
+          <div class="col-10 q-pa-sm q-ma-sm ">
+            <div class='row justify-end items-center'>
+            <div class="col-1 text-right q-px-xs">{{ toggleText() }}</div>
+            <q-toggle
+              v-model="grid"
+              keep-color
+              color="amber-3"
+            />
+            </div>
+          </div>
         </div>
 
+      <div class='row justify-center' v-if="grid">
         <div
-          class="q-pa-md row items-start q-gutter-md"
-          v-if="grid"
+          class="my-card col-md-3 q-pa-sm q-ma-sm col-xs-12 col-sm-4"
+          v-for="color in colors"
+          :key='color.id'
         >
           <q-card
-            v-for="color in colors"
-            :key='color.id'
             flat
             bordered
-            class="my-card">
+            class="q-pa-sm">
 
-            <q-card-section class="q-py-none flex q-pr-xs">
-              <div class="text-subtitle1 col-10">{{ color.name }}</div>
+            <q-card-section class="q-py-none row justify-between items-center q-pr-xs">
+              <div class="text-subtitle1 col-10 text-no-wrap">{{ color.name }}</div>
               <q-space></q-space>
               <div class="col-1">
                 <q-btn color="grey-7" round flat icon="more_vert" size="12px">
@@ -48,11 +129,11 @@
 
             </q-card-section>
 
-            <q-card-section horizontal>
+            <q-card-section horizontal class="row justify-between items-center">
               <q-card-section  class="col-8 q-py-none">
-              <div class="text-caption no-wrap">{{ color.color_type }}</div>
-              <div class="text-caption text-grey-7 q-mt-sm no-wrap">RGB: {{ color.rgb_code }}</div>
-              <div class="text-caption text-grey-7 no-wrap">Web: {{ color.hex_code }}</div>
+                <div class="text-caption text-no-wrap">{{ color.color_type }}</div>
+                <div class="text-caption text-grey-7 q-mt-sm text-no-wrap">RGB: {{ color.rgb_code }}</div>
+                <div class="text-caption text-grey-7 text-no-wrap">Web: {{ color.hex_code }}</div>
               </q-card-section>
               <q-separator vertical inset />
               <q-card-section class="col-4 text-center">
@@ -63,11 +144,14 @@
           </q-card>
 
         </div>
+      </div>
+
+      <div class='row justify-center' v-else>
 
         <q-list
           padding
-          v-else
-          style='min-width: 500px;'>
+          style='min-width: 500px;'
+          class="col-10 col-md-6">
 
           <q-item
             tag="label"
@@ -103,6 +187,7 @@
         </q-list>
       </div>
     </div>
+
   </q-page>
 </template>
 
@@ -116,6 +201,9 @@ import { TranslateResult } from 'vue-i18n';
     data: function () {
       return {
         grid: true,
+        tab: 'mails',
+        innerTab: 'innerMails',
+        splitterModel: 20,
         colors: this.$store.state.colors as Color[],
         hardScales: this.$store.state.hardScales as HardScale[],
         materials: this.$store.state.materials as Material[]
@@ -137,8 +225,13 @@ import { TranslateResult } from 'vue-i18n';
 
 <style lang="sass" scoped>
   .my-card
-    width: 100%
+    min-width: 230px
+    height: 120px
     max-width: 250px
-    height: 100%
-    max-height: 110px
+  
+  .my-label 
+    ::v-deep .q-tab__label
+      font-weight: 700!important
+        
+
 </style>
