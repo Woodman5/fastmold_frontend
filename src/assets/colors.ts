@@ -2,7 +2,7 @@ function colors() {
 
     return [
         {
-            "name": "White",
+            "name": "Белый",
             "slug": "white",
             "color_type": "regular colors",
             "hex_code": "#FFFFFF",

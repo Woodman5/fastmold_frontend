@@ -1,163 +1,184 @@
 <template>
   <q-page padding>
-<div class="q-pa-md" style="max-width: 800px">
-    <q-card>
-      <q-tabs
-        v-model="tab"
+    <div class="row justify-center">
+      <div class="q-pa-md col-8" style="max-width: 900px; min-width: 770px">
+        <q-card>
+          <q-tabs
+            v-model="tab"
 
-        class="text-grey-8 nunito-font"
-        active-color="primary"
-        indicator-color="orange"
-        align="justify"
-      >
-        <q-tab name="simple" :label="$t('simpleColors')" class="my-label" />
-        <q-tab name="ral" label="RAL" class="my-label" />
-        <q-tab name="ncs" label="NCS" class="my-label" />
-      </q-tabs>
-
-      <q-separator />
-
-      <q-tab-panels v-model="tab" animated style="height: 500px">
-
-        <q-tab-panel name="simple">
-
-          <div class="row justify-between">
-            <div class="col-1 q-pa-md"
-                 v-for="color in simpColors"
-                 :key="color.id"
-            >
-              <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="3rem"/>
-              <q-tooltip>
-                <p>{{color.name}}</p>
-                <p>RGB: {{ color.rgb_code }}</p>
-                <p>Web: {{ color.hex_code }}</p>
-              </q-tooltip>
-            </div>
-          </div>
-        </q-tab-panel>
-
-        <q-tab-panel name="ral" class="q-pa-none">
-
-          <q-splitter
-            v-model="splitterModel"
-            style="height: 100%"
+            class="text-grey-8 nunito-font"
+            active-color="primary"
+            indicator-color="orange"
+            align="justify"
           >
+            <q-tab name="simple" :label="$t('simpleColors')" class="my-label" />
+            <q-tab name="ral" label="RAL" class="my-label" />
+            <q-tab name="ncs" label="NCS" class="my-label" />
+          </q-tabs>
 
-            <template v-slot:before>
-              <q-tabs
-                v-model="innerTab"
-                vertical
-                class="text-teal"
+          <q-separator />
+
+          <q-tab-panels v-model="tab" animated style="height: 500px">
+
+            <q-tab-panel name="simple">
+
+              <div class="row justify-between">
+                <div class="col-2 text-center q-mb-sm"
+                    v-for="color in simpColors"
+                    :key="color.id"
+                >
+
+                <q-card 
+                class="tab-card" 
+                flat 
+                
+                >
+                  <q-card-section>
+                    <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="3rem"/>
+                  </q-card-section>
+
+                  <q-card-section  class="col-8 q-py-none row">
+                    <div class="nunito-font text-center text-grey-9 col-12" style="min-height:30px">
+                      {{ color.name }}
+                    </div>
+                    <div class="my-tab-caption text-grey-6 q-mt-xs text-no-wrap col-12"
+                    >
+                      RGB: {{ color.rgb_code }}</div>
+                    <div class="my-tab-caption text-grey-6 text-no-wrap col-12"
+                    >
+                      Web: {{ color.hex_code }}</div>
+                  </q-card-section>
+
+                </q-card>
+
+                </div>
+              </div>
+
+            </q-tab-panel>
+
+            <q-tab-panel name="ral" class="q-pa-none">
+
+              <q-splitter
+                v-model="splitterModel"
+                style="height: 100%"
               >
-                <q-tab name="innerSimple" icon="mail" label="Mails" />
-                <q-tab name="innerRal" icon="alarm" label="Alarms" />
-                <q-tab name="innerNCS" icon="movie" label="Movies" />
-              </q-tabs>
-            </template>
 
-            <template v-slot:after>
-              <q-tab-panels
-                v-model="innerTab"
-                animated
-                transition-prev="slide-down"
-                transition-next="slide-up"
+                <template v-slot:before>
+                  <q-tabs
+                    v-model="innerTab"
+                    vertical
+                    class="text-teal"
+                  >
+                    <q-tab name="innerSimple" icon="mail" label="Mails" />
+                    <q-tab name="innerRal" icon="alarm" label="Alarms" />
+                    <q-tab name="innerNCS" icon="movie" label="Movies" />
+                  </q-tabs>
+                </template>
+
+                <template v-slot:after>
+                  <q-tab-panels
+                    v-model="innerTab"
+                    animated
+                    transition-prev="slide-down"
+                    transition-next="slide-up"
+                  >
+                    <q-tab-panel name="innerSimple">
+                      <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
+                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
+                        Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
+                        1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
+                        possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+
+                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
+                        На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
+                        В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
+                        Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
+                        </p>
+
+                    </q-tab-panel>
+
+                    <q-tab-panel name="innerRal">
+                      <div class="text-h4 q-mb-md">Alarms</div>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                    </q-tab-panel>
+
+                    <q-tab-panel name="innerNCS">
+                      <div class="text-h4 q-mb-md">Movies</div>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                    </q-tab-panel>
+                  </q-tab-panels>
+                </template>
+
+              </q-splitter>
+            </q-tab-panel>
+
+            <q-tab-panel name="ncs" class="q-pa-none">
+
+              <q-splitter
+                v-model="splitterModel"
+
               >
-                <q-tab-panel name="innerSimple">
-                  <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
-                  <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                    Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
-                    1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
-                    possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
 
-                  <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                    На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
-                    В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
-                    Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
-                    </p>
+                <template v-slot:before>
+                  <q-tabs
+                    v-model="innerTab"
+                    vertical
+                    class="text-teal"
+                  >
+                    <q-tab name="innerSimple" icon="mail" label="Mails" />
+                    <q-tab name="innerRal" icon="alarm" label="Alarms" />
+                    <q-tab name="innerNCS" icon="movie" label="Movies" />
+                  </q-tabs>
+                </template>
 
-                </q-tab-panel>
+                <template v-slot:after>
+                  <q-tab-panels
+                    v-model="innerTab"
+                    animated
+                    transition-prev="slide-down"
+                    transition-next="slide-up"
+                  >
+                    <q-tab-panel name="innerSimple">
+                      <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
+                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
+                        Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
+                        1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
+                        possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
 
-                <q-tab-panel name="innerRal">
-                  <div class="text-h4 q-mb-md">Alarms</div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                </q-tab-panel>
+                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
+                        На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
+                        В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
+                        Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
+                      </p>
 
-                <q-tab-panel name="innerNCS">
-                  <div class="text-h4 q-mb-md">Movies</div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                </q-tab-panel>
-              </q-tab-panels>
-            </template>
+                    </q-tab-panel>
 
-          </q-splitter>
-        </q-tab-panel>
+                    <q-tab-panel name="innerRal">
+                      <div class="text-h4 q-mb-md">Alarms</div>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                    </q-tab-panel>
 
-        <q-tab-panel name="ncs" class="q-pa-none">
+                    <q-tab-panel name="innerNCS">
+                      <div class="text-h4 q-mb-md">Movies</div>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                    </q-tab-panel>
+                  </q-tab-panels>
+                </template>
 
-          <q-splitter
-            v-model="splitterModel"
-
-          >
-
-            <template v-slot:before>
-              <q-tabs
-                v-model="innerTab"
-                vertical
-                class="text-teal"
-              >
-                <q-tab name="innerSimple" icon="mail" label="Mails" />
-                <q-tab name="innerRal" icon="alarm" label="Alarms" />
-                <q-tab name="innerNCS" icon="movie" label="Movies" />
-              </q-tabs>
-            </template>
-
-            <template v-slot:after>
-              <q-tab-panels
-                v-model="innerTab"
-                animated
-                transition-prev="slide-down"
-                transition-next="slide-up"
-              >
-                <q-tab-panel name="innerSimple">
-                  <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
-                  <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                    Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
-                    1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
-                    possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-
-                  <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                    На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
-                    В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
-                    Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
-                  </p>
-
-                </q-tab-panel>
-
-                <q-tab-panel name="innerRal">
-                  <div class="text-h4 q-mb-md">Alarms</div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                </q-tab-panel>
-
-                <q-tab-panel name="innerNCS">
-                  <div class="text-h4 q-mb-md">Movies</div>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                </q-tab-panel>
-              </q-tab-panels>
-            </template>
-
-          </q-splitter>
-        </q-tab-panel>
+              </q-splitter>
+            </q-tab-panel>
 
 
-      </q-tab-panels>
-    </q-card>
-  </div>
+          </q-tab-panels>
+        </q-card>
+      </div>
+    </div>
 
       <div class="q-pa-md">
 
@@ -345,6 +366,22 @@ import { TranslateResult } from 'vue-i18n';
   .my-label
     ::v-deep .q-tab__label
       font-weight: 700!important
+  
+  .tab-card 
+    width: 120px
+    min-width: 120px
+    height: 150px
+    line-height: 1
+    // background: Tan
+
+  .my-tab-caption
+    font-family: 'Fira Sans'
+    font-size: 0.7rem
+    font-weight: 400
+    line-height: 1rem
+    letter-spacing: 0.03333em
+
+  
 
 
 </style>
