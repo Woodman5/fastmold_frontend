@@ -1,8 +1,27 @@
 <template>
   <q-page padding>
     <div class="row justify-center">
+
+
+        <div class="col-8 q-pa-sm q-ma-sm nunito-font">
+          <h5>{{ $tc('color', 1) }}</h5>
+        </div>
+
+
+        <div class="col-8 q-pa-sm q-ma-sm ">
+          <div class='row justify-end items-center'>
+            <div class="col-1 text-right q-px-xs">{{ toggleText() }}</div>
+            <q-toggle
+              v-model="grid"
+              keep-color
+              color="amber-3"
+            />
+          </div>
+        </div>
+
+
       <div class="q-pa-md col-8" style="max-width: 900px; min-width: 770px">
-        <q-card>
+        <q-card flat>
           <q-tabs
             v-model="tab"
 
@@ -11,49 +30,58 @@
             indicator-color="orange"
             align="justify"
           >
-            <q-tab name="simple" :label="$t('simpleColors')" class="my-label" />
-            <q-tab name="ral" label="RAL" class="my-label" />
-            <q-tab name="ncs" label="NCS" class="my-label" />
+            <q-tab name="simple" :label="$t('simpleColors')" class="my-label"/>
+            <q-tab name="ral" label="RAL" class="my-label"/>
+<!--            <q-tab name="ncs" label="NCS" class="my-label"/>-->
           </q-tabs>
 
-          <q-separator />
+          <q-separator/>
 
           <q-tab-panels v-model="tab" animated style="height: 500px">
 
-            <q-tab-panel name="simple">
+            <q-tab-panel name="simple" class="q-pa-sm">
 
-              <div class="row justify-between">
-                <div class="col-2 text-center q-mb-sm"
-                    v-for="color in simpColors"
-                    :key="color.id"
-                >
+              <q-scroll-area
+                :thumb-style="thumbStyle"
+                :bar-style="barStyle"
+                class="q-py-sm q-px-md"
+                style="height: 100%; "
+              >
 
-                <q-card 
-                class="tab-card" 
-                flat 
-                
-                >
-                  <q-card-section>
-                    <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="3rem"/>
-                  </q-card-section>
+                <div class="row justify-between">
+                  <div class="col-2 text-center q-mb-sm"
+                       v-for="color in simpColors"
+                       :key="color.id"
+                  >
 
-                  <q-card-section  class="col-8 q-py-none row">
-                    <div class="nunito-font text-center text-grey-9 col-12" style="min-height:30px">
-                      {{ color.name }}
-                    </div>
-                    <div class="my-tab-caption text-grey-6 q-mt-xs text-no-wrap col-12"
+                    <q-card
+                      class="tab-card"
+                      flat
+
                     >
-                      RGB: {{ color.rgb_code }}</div>
-                    <div class="my-tab-caption text-grey-6 text-no-wrap col-12"
-                    >
-                      Web: {{ color.hex_code }}</div>
-                  </q-card-section>
+                      <q-card-section>
+                        <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="3rem"/>
+                      </q-card-section>
 
-                </q-card>
+                      <q-card-section class="col-8 q-py-none row">
+                        <div class="nunito-font text-center text-grey-9 col-12" style="min-height:30px">
+                          {{ color.name }}
+                        </div>
+                        <div class="my-tab-caption text-grey-6 q-mt-xs text-no-wrap col-12"
+                        >
+                          RGB: {{ color.rgb_code }}
+                        </div>
+                        <div class="my-tab-caption text-grey-6 text-no-wrap col-12"
+                        >
+                          Web: {{ color.hex_code }}
+                        </div>
+                      </q-card-section>
 
+                    </q-card>
+
+                  </div>
                 </div>
-              </div>
-
+              </q-scroll-area>
             </q-tab-panel>
 
             <q-tab-panel name="ral" class="q-pa-none">
@@ -67,108 +95,85 @@
                   <q-tabs
                     v-model="innerTab"
                     vertical
-                    class="text-teal"
+                    class="nunito-font my-label-6"
                   >
-                    <q-tab name="innerSimple" icon="mail" label="Mails" />
-                    <q-tab name="innerRal" icon="alarm" label="Alarms" />
-                    <q-tab name="innerNCS" icon="movie" label="Movies" />
+                    <q-tab name="1000" label="1000...1037" class="text-yellow-8"/>
+                    <q-tab name="2000" label="2000...2013" class="text-orange-8"/>
+                    <q-tab name="3000" label="3000...3033" class="text-red-8"/>
+                    <q-tab name="4000" label="4000...4012" class="text-deep-purple-8"/>
+                    <q-tab name="5000" label="5000...5026" class="text-blue-8"/>
+                    <q-tab name="6000" label="6000...6038" class="text-green-8"/>
+                    <q-tab name="7000" label="7000...7048" class="text-blue-grey-8"/>
+                    <q-tab name="8000" label="8000...8029" class="text-brown-8"/>
+                    <q-tab name="9000" label="9000...9023" class="text-grey-8"/>
                   </q-tabs>
                 </template>
 
                 <template v-slot:after>
-                  <q-tab-panels
-                    v-model="innerTab"
-                    animated
-                    transition-prev="slide-down"
-                    transition-next="slide-up"
+
+                  <q-scroll-area
+                    :thumb-style="thumbStyle"
+                    :bar-style="barStyle"
+                    class="q-py-sm q-px-md"
+                    style="height: 100%; "
                   >
-                    <q-tab-panel name="innerSimple">
-                      <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
-                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                        Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
-                        1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
-                        possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
 
-                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                        На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
-                        В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
-                        Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
-                        </p>
+                    <q-tab-panels
+                      v-model="innerTab"
+                      animated
+                      transition-prev="slide-down"
+                      transition-next="slide-up"
+                      style="height: 100%"
+                    >
+                      <q-tab-panel
+                        :name="name[1]"
+                        v-for="name in ralNames"
+                        :key="name[0]"
+                      >
 
-                    </q-tab-panel>
 
-                    <q-tab-panel name="innerRal">
-                      <div class="text-h4 q-mb-md">Alarms</div>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                    </q-tab-panel>
+                        <div class="row justify-start">
+                          <div class="col-3 text-center q-mb-sm"
+                               v-for="color in ralColors[name[0]]"
+                               :key="color.id"
+                          >
 
-                    <q-tab-panel name="innerNCS">
-                      <div class="text-h4 q-mb-md">Movies</div>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                    </q-tab-panel>
-                  </q-tab-panels>
-                </template>
+                            <q-card
+                              class="tab-card"
+                              flat
+                            >
+                              <q-card-section>
+                                <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="3rem"/>
+                                <q-tooltip anchor="top middle" self="bottom middle"  :offset="[0, -12]">
+                                  {{ color.description }}
+                                </q-tooltip>
+                              </q-card-section>
 
-              </q-splitter>
-            </q-tab-panel>
+                              <q-card-section class="col-8 q-py-none row">
+                                <div class="nunito-font text-center text-grey-9 col-12" style="min-height:30px">
+                                  {{ color.name }}
+                                </div>
+                                <div class="my-tab-caption text-grey-6 q-mt-xs text-no-wrap col-12"
+                                >
+                                  RGB: {{ color.rgb_code }}
+                                </div>
+                                <div class="my-tab-caption text-grey-6 text-no-wrap col-12"
+                                >
+                                  Web: {{ color.hex_code }}
+                                </div>
+                              </q-card-section>
 
-            <q-tab-panel name="ncs" class="q-pa-none">
+                            </q-card>
 
-              <q-splitter
-                v-model="splitterModel"
+                          </div>
+                        </div>
 
-              >
 
-                <template v-slot:before>
-                  <q-tabs
-                    v-model="innerTab"
-                    vertical
-                    class="text-teal"
-                  >
-                    <q-tab name="innerSimple" icon="mail" label="Mails" />
-                    <q-tab name="innerRal" icon="alarm" label="Alarms" />
-                    <q-tab name="innerNCS" icon="movie" label="Movies" />
-                  </q-tabs>
-                </template>
+                      </q-tab-panel>
 
-                <template v-slot:after>
-                  <q-tab-panels
-                    v-model="innerTab"
-                    animated
-                    transition-prev="slide-down"
-                    transition-next="slide-up"
-                  >
-                    <q-tab-panel name="innerSimple">
-                      <div class="text-h4 q-mb-md nunito-font text-italic">Материалы</div>
-                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                        Lorem ipsum dolor +7 (985) 270 63 23 sit, amet consectetur adipisicing elit. 1.5
-                        1548,98 Quis praesentium cumque magnam 0123456789 odio iure quidem, quod illum numquam
-                        possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
+                    </q-tab-panels>
 
-                      <p style="font-size: 0.9rem; font-weight: 400" class="fira-font text-grey-8">
-                        На 12:40 МСК главная криптовалюта торгуется на криптобирже Binance на уровне $54 тыс.
-                        В воскресенье, 18 апреля, котировки биткоина опускались до трехнедельного минимума — $50,9 тыс.
-                        Это произошло после того, как 13 апреля первая цифровая монета обновила исторический максимум на отметке $64,8 тыс.
-                      </p>
-
-                    </q-tab-panel>
-
-                    <q-tab-panel name="innerRal">
-                      <div class="text-h4 q-mb-md">Alarms</div>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                    </q-tab-panel>
-
-                    <q-tab-panel name="innerNCS">
-                      <div class="text-h4 q-mb-md">Movies</div>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero.</p>
-                    </q-tab-panel>
-                  </q-tab-panels>
+                  </q-scroll-area>
                 </template>
 
               </q-splitter>
@@ -180,126 +185,13 @@
       </div>
     </div>
 
-      <div class="q-pa-md">
-
-        <div class='row justify-center'>
-          <div class="col-10 q-pa-sm q-ma-sm nunito-font">
-            <h5>{{ $tc('color', 1) }}</h5>
-          </div>
-
-
-
-          <div class="col-10 q-pa-sm q-ma-sm ">
-            <div class='row justify-end items-center'>
-            <div class="col-1 text-right q-px-xs">{{ toggleText() }}</div>
-            <q-toggle
-              v-model="grid"
-              keep-color
-              color="amber-3"
-            />
-            </div>
-          </div>
-        </div>
-
-      <div class='row justify-center' v-if="grid">
-        <div
-          class="my-card col-md-3 q-pa-sm q-ma-sm col-xs-12 col-sm-4"
-          v-for="color in colors"
-          :key='color.id'
-        >
-          <q-card
-            flat
-            bordered
-            class="q-pa-sm">
-
-            <q-card-section class="q-py-none row justify-between items-center q-pr-xs">
-              <div class="text-subtitle1 col-10 text-no-wrap">{{ color.name }}</div>
-              <q-space></q-space>
-              <div class="col-2">
-                <q-btn color="grey-7" round flat icon="more_vert" size="12px">
-                  <q-menu cover auto-close>
-                    <q-list>
-                      <q-item >
-                        <q-btn class="gt-xs" size="12px" flat dense round icon="edit" :to="'/color/' + color.id" color="grey-8"/>
-                      </q-item>
-                      <q-item >
-                        <q-btn class="gt-xs" size="12px" flat dense round icon="delete" color="grey-8"/>
-                      </q-item>
-                    </q-list>
-                  </q-menu>
-                </q-btn>
-              </div>
-
-            </q-card-section>
-            <q-separator />
-
-
-            <q-card-section horizontal class="row justify-between items-center">
-              <q-card-section  class="col-8 q-py-none">
-                <div class="text-caption text-no-wrap">{{ color.color_type }}</div>
-                <div class="text-caption text-grey-7 q-mt-sm text-no-wrap">RGB: {{ color.rgb_code }}</div>
-                <div class="text-caption text-grey-7 text-no-wrap">Web: {{ color.hex_code }}</div>
-              </q-card-section>
-              <q-separator vertical inset />
-              <q-card-section class="col-4 text-center">
-                <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="2rem"/>
-              </q-card-section>
-            </q-card-section>
-
-          </q-card>
-
-        </div>
-      </div>
-
-      <div class='row justify-center' v-else>
-
-        <q-list
-          padding
-          style='min-width: 500px;'
-          class="col-10 col-md-6">
-
-          <q-item
-            tag="label"
-            v-ripple
-            v-for="color in colors"
-            :key='color.id'
-            >
-            <q-item-section avatar class="q-pr-lg">
-              <q-avatar :style="{background: color.hex_code}" class="shadow-2" size="2rem"/>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label><span class="text-weight-medium">{{ color.name }}</span></q-item-label>
-              <q-item-label caption>
-                {{ color.color_type }}
-              </q-item-label>
-            </q-item-section>
-
-            <q-item-section>
-              <q-item-label caption>RGB: {{ color.rgb_code }}</q-item-label>
-              <q-item-label caption>Web: {{ color.hex_code }}</q-item-label>
-            </q-item-section>
-
-            <q-item-section top side>
-              <div class="text-grey-8 q-gutter-xs q-mt-xs">
-                <q-btn class="gt-xs" size="12px" flat dense round icon="edit" :to="'/color/' + color.id" />
-                <q-btn class="gt-xs" size="12px" flat dense round icon="delete" />
-                <q-btn size="12px" flat dense round icon="more_vert" />
-              </div>
-            </q-item-section>
-          </q-item>
-
-        </q-list>
-      </div>
-    </div>
-
   </q-page>
 </template>
 
 <script lang='ts'>
-import Vue from 'vue';
-import { Color, Material, HardScale } from 'src/store/types'
-import { TranslateResult } from 'vue-i18n';
+  import Vue from 'vue';
+  import { Color, Material, HardScale } from 'src/store/types'
+  import { TranslateResult } from 'vue-i18n';
 
   export default Vue.extend({
     name: 'MaterialsList',
@@ -307,11 +199,37 @@ import { TranslateResult } from 'vue-i18n';
       return {
         grid: true,
         tab: 'simple',
-        innerTab: 'innerRal',
+        innerTab: '1000',
+        innerTab2: 'N',
         splitterModel: 20,
         colors: this.$store.state.colors as Color[],
         hardScales: this.$store.state.hardScales as HardScale[],
-        materials: this.$store.state.materials as Material[]
+        materials: this.$store.state.materials as Material[],
+        thumbStyle: {
+          right: '0px',
+          borderRadius: '4px',
+          backgroundColor: '#a0a0a5',
+          width: '4px',
+          opacity: 0.75
+        },
+        barStyle: {
+          right: '0px',
+          borderRadius: '4px',
+          backgroundColor: '#a0a0a5',
+          width: '4px',
+          opacity: 0.2
+        },
+        ralNames: [
+          [0, '1000'],
+          [1, '2000'],
+          [2, '3000'],
+          [3, '4000'],
+          [4, '5000'],
+          [5, '6000'],
+          [6, '7000'],
+          [7, '8000'],
+          [8, '9000'],
+        ]
       }
     },
     // mounted() {
@@ -319,12 +237,12 @@ import { TranslateResult } from 'vue-i18n';
     //
     // },
     methods: {
-      toggleText() : TranslateResult {
+      toggleText(): TranslateResult {
         return this.grid ? this.$tc('grid') : this.$tc('list')
       }
     },
     computed: {
-      simpColors() : Color[] {
+      simpColors(): Color[] {
         let sColors = [] as Color[]
         this.colors.forEach(function (color, i, colors) {
           if (color.color_type == 'regular colors') {
@@ -333,16 +251,34 @@ import { TranslateResult } from 'vue-i18n';
         })
         return sColors
       },
-      ralColors() : Color[] {
-        let rColors = [] as Color[]
+      ralColors(): Array<Color>[] {
+        let rColors = [[], [], [], [], [], [], [], [], []] as Array<Color>[]
         this.colors.forEach(function (color, i, colors) {
           if (color.color_type == 'ral') {
-            rColors.push(color)
+            switch (color.name[0]) {
+              case '1': rColors[0].push(color)
+                break
+              case '2': rColors[1].push(color)
+                break
+              case '3': rColors[2].push(color)
+                break
+              case '4': rColors[3].push(color)
+                break
+              case '5': rColors[4].push(color)
+                break
+              case '6': rColors[5].push(color)
+                break
+              case '7': rColors[6].push(color)
+                break
+              case '8': rColors[7].push(color)
+                break
+              case '9': rColors[8].push(color)
+            }
           }
         })
         return rColors
       },
-      ncsColors() : Color[] {
+      ncsColors(): Color[] {
         let nColors = [] as Color[]
         this.colors.forEach(function (color, i, colors) {
           if (color.color_type == 'ncs') {
@@ -365,23 +301,25 @@ import { TranslateResult } from 'vue-i18n';
 
   .my-label
     ::v-deep .q-tab__label
-      font-weight: 700!important
-  
-  .tab-card 
+      font-weight: 700 !important
+
+  .my-label-6
+    ::v-deep .q-tab__label
+      font-weight: 600 !important
+
+  .tab-card
     width: 120px
     min-width: 120px
     height: 150px
     line-height: 1
-    // background: Tan
+    //background: Tan
 
   .my-tab-caption
-    font-family: 'Fira Sans'
+    font-family: 'Fira Sans', sans-serif
     font-size: 0.7rem
     font-weight: 400
     line-height: 1rem
     letter-spacing: 0.03333em
-
-  
 
 
 </style>

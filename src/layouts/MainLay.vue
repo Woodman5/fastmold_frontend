@@ -21,7 +21,8 @@
 
           <q-space></q-space>
 
-          <q-btn class="gt-sm" flat
+          <q-btn class="gt-sm nunito-font"
+                 flat
                  v-for="link in links"
                  :key="link.name"
                  :label="$t(link.name)"
@@ -30,12 +31,12 @@
           </q-btn>
 
           <q-btn-dropdown
-            class="gt-sm"
+            class="gt-sm nunito-font"
             flat
             icon="fas fa-globe"
             :label="langLabel"
           >
-            <q-list>
+            <q-list class="nunito-font">
 
               <q-item clickable
                       v-close-popup
@@ -158,6 +159,12 @@
       return {
         left: false,
         text: 'test',
+        isUserLoggedIn: true,
+        user: {
+          name: 'Yury',
+          email: 'test@test.com',
+          role: 'Admin'
+        },
         langs: [
           { value: 'en-us', label: 'En', name: 'English' },
           { value: 'ru-ru', label: 'Ru', name: 'Русский' },
@@ -173,8 +180,8 @@
       },
       async onLogout() {
         await this.$store.dispatch('logout').catch(error => console.log(error))
-        if (this.$route.name !== 'home'){
-          this.$router.push({name: 'home'}).catch(error => console.log(error))
+        if (this.$route.name !== 'home') {
+          this.$router.push({ name: 'home' }).catch(error => console.log(error))
         }
       }
     },
@@ -189,9 +196,9 @@
       ...mapGetters({
         getInfo: 'userProfile/getTestInfo',
         user: 'userProfile/user',
-        isUserLoggedIn: 'userProfile/check'
+        //isUserLoggedIn: 'userProfile/check'
       }),
-      langLabel() : string {
+      langLabel(): string {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         return this.langs.find(lang => lang.value === this.$i18n.locale)!.label
       },
@@ -215,16 +222,16 @@
       links() {
         if (this.isUserLoggedIn) {
           return [
-            {name: 'Orders', icon: 'bookmark_border', url: '/orders'},
-            {name: 'New ad', icon: 'note_add', url: '/new'},
-            {name: 'My ads', icon: 'list', url: '/list'},
-            {name: 'My info', icon: 'person', url: '/user'},
+            { name: 'Orders', icon: 'bookmark_border', url: '/orders' },
+            { name: 'New ad', icon: 'note_add', url: '/new' },
+            { name: 'My ads', icon: 'list', url: '/list' },
+            { name: 'My info', icon: 'person', url: '/user' },
           ]
         }
         return [
-          {name: 'Login', icon: 'lock', url: '/login'},
-          {name: 'Registration', icon: 'face', url: '/registration'},
-          {name: 'Materials', icon: 'fas fa-flask', url: '/materials'},
+          { name: 'Login', icon: 'lock', url: '/login' },
+          { name: 'Registration', icon: 'face', url: '/registration' },
+          { name: 'Materials', icon: 'fas fa-flask', url: '/materials' },
         ]
       }
     }
@@ -237,6 +244,7 @@
     font-weight: 500;
     font-size: 20px;
   }
+
   .header {
     background: linear-gradient(145deg, #027be3 11%, #014a88 75%) !important;
   }
