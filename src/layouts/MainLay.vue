@@ -140,9 +140,48 @@
 
     </q-drawer>
 
+    <q-drawer
+      v-if="isUserLoggedIn"
+      v-model="right"
+      side="right"
+      bordered
+      :width="280"
+      :breakpoint="1060"
+    >
+      <RightDrawer></RightDrawer>
+
+      <div class="absolute" style="top: 10px; left: -13px">
+        <q-btn
+          v-if="right"
+          dense
+          round
+          size="10px"
+          unelevated
+          color="amber"
+          icon="chevron_right"
+          @click="right = false"
+        />
+      </div>
+
+    </q-drawer>
+
 
     <q-page-container>
       <router-view></router-view>
+
+      <div class="absolute" style="top: 60px; right: 10px">
+        <q-btn
+          v-if="!right"
+          dense
+          round
+          size="10px"
+          unelevated
+          color="amber"
+          icon="chevron_left"
+          @click="right = true"
+        />
+      </div>
+
     </q-page-container>
 
 
@@ -152,12 +191,15 @@
 <script lang="ts">
   import Vue from 'vue';
   import { mapGetters } from 'vuex'
+  import RightDrawer from 'components/common/RightDrawer.vue';
   // import { User } from 'src/store/user/types'
 
   export default Vue.extend({
+    components: { RightDrawer },
     data: function () {
       return {
         left: false,
+        right: true,
         text: 'test',
         isUserLoggedIn: true,
         user: {
