@@ -15,7 +15,10 @@ module.exports = configure((ctx) => ({
   // https://v1.quasar.dev/quasar-cli/supporting-ts
   supportTS: {
     tsCheckerConfig: {
-      eslint: false,
+      eslint: {
+        enabled: false,
+        files: './src/**/*.{ts,tsx,js,jsx,vue}',
+      },
     },
   },
 
@@ -26,7 +29,6 @@ module.exports = configure((ctx) => ({
   // --> boot files are part of "main.js"
   // https://v1.quasar.dev/quasar-cli/boot-files
   boot: [
-    'composition-api',
     'i18n',
     'axios',
   ],
@@ -111,7 +113,7 @@ module.exports = configure((ctx) => ({
   // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
   framework: {
     iconSet: 'material-icons', // Quasar icon set
-    lang: 'en-us', // Quasar language pack
+    lang: 'en-US', // Quasar language pack
 
     // Possible values for "importStrategy":
     // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives

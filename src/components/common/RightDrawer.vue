@@ -8,7 +8,7 @@
           default-expand-all
           color="amber"
           no-connectors
-          :selected.sync="selected"
+          v-model:selected="selected"
           @update:selected="selectedHandler"
           ref="qtree"
         />
@@ -18,7 +18,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     name: 'RightDrawer',
     data: function () {
       return {
@@ -72,8 +74,9 @@
       }
     },
     methods: {
-      loadPage (node) {
-        console.log(node.url)
+      loadPage(node) : void {
+        console.log(node)
+        // this.$router.push({ name: 'orders' }).catch(error => console.log(error))
       },
       selectedHandler(target) {
         if(target === null) return
@@ -86,7 +89,7 @@
       }
     },
 
-  }
+  })
 </script>
 
 <style scoped>

@@ -1,8 +1,8 @@
-import { RouteConfig } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 import GuestGuard from "src/middleware/guest";
 import AuthGuard from "src/middleware/auth";
 
-const routes: RouteConfig[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('layouts/MainLay.vue'),
@@ -24,9 +24,9 @@ const routes: RouteConfig[] = [
   // Always leave this as last one,
   // but you can also remove it
   {
-    path: '*',
-    component: () => import('pages/Error404.vue'),
-  },
+    path: '/:catchAll(.*)*',
+    component: Error404
+  }
 ];
 
 export default routes;

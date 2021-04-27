@@ -300,11 +300,11 @@
     max-width: 250px
 
   .my-label
-    ::v-deep .q-tab__label
+    :deep(.q-tab__label)
       font-weight: 700 !important
 
   .my-label-6
-    ::v-deep .q-tab__label
+    :deep(.q-tab__label)
       font-weight: 600 !important
 
   .tab-card

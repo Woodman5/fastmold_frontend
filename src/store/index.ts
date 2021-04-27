@@ -1,5 +1,4 @@
-import { store } from 'quasar/wrappers';
-import Vuex from 'vuex';
+import { createStore } from 'vuex'
 import { RootState, Color } from './types';
 import ads from './ads/ads';
 import shared from './shared/shared';
@@ -26,7 +25,21 @@ const allmaterials = materials()
  */
 
 
-export default store(({ Vue }) => {
+export default function (/* { ssrContext } */) {
+  const Store = createStore({
+    modules: {
+      // example
+    },
+
+    // enable strict mode (adds overhead!)
+    // for dev mode and --debug builds only
+    strict: process.env.DEBUGGING
+  })
+
+  return Store
+}
+
+/*export default store(({ Vue }) => {
   Vue.use(Vuex);
 
   const Store = new Vuex.Store<RootState>({
@@ -47,5 +60,5 @@ export default store(({ Vue }) => {
     strict: !!process.env.DEBUGGING,
   });
   return Store;
-});
+});*/
 
