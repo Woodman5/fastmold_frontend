@@ -8,8 +8,8 @@ const routes: RouteRecordRaw[] = [
     component: () => import('layouts/MainLay.vue'),
     // component: () => import('layouts/MainLayout.vue'),
     children: [
-      // { path: '', component: () => import('pages/Index.vue') },
-      { path: '', component: () => import('components/home.vue'), name: 'home' },
+      { path: '', component: () => import('pages/Index.vue') },
+      // { path: '', component: () => import('components/home.vue'), name: 'home' },
       { path: '/login', component: () => import('components/Auth/Login.vue'), name: 'login'}, //, beforeEnter: GuestGuard },
       { path: '/registration', component: () => import('components/Auth/Registration.vue'), name: 'registration'}, //, beforeEnter: GuestGuard },
       { path: '/new', component: () => import('components/Ads/NewAd.vue'), name: 'new'}, //, beforeEnter: AuthGuard },
@@ -25,8 +25,8 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
-    component: Error404
-  }
+    component: () => import('pages/Error404.vue'),
+  },
 ];
 
 export default routes;

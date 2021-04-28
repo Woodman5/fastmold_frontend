@@ -24,5 +24,6 @@ export default {
   color: 'Цвет | Цвета | Цветов',
   grid: 'Сетка | Сетки',
   list: 'Список | Списки',
-  simpleColors: 'Простые цвета'
+  simpleColors: 'Простые цвета',
+  orders: 'Заказы'
 }

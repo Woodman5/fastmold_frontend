@@ -9,10 +9,13 @@ import { RootState } from '../types';
 
 const namespaced = true;
 
-export const userProfile: Module<UserState, RootState> = {
+const userProfile: Module<UserState, RootState> = {
   namespaced,
   state,
   getters,
   actions,
   mutations,
 };
+
+
+export default userProfile

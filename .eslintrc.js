@@ -27,10 +27,11 @@ module.exports = {
   // Rules order is important, please avoid shuffling them
   extends: [
     // Base ESLint recommended rules
-    // 'eslint:recommended',
+    'eslint:recommended',
 
     // https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#usage
     // ESLint typescript rules
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     // consider disabling this class of rules if linting takes too long
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
@@ -38,13 +39,13 @@ module.exports = {
     // Uncomment any of the lines below to choose desired strictness,
     // but leave only one uncommented!
     // See https://eslint.vuejs.org/rules/#available-rules
-    'plugin:vue/vue3-essential', // Priority A: Essential (Error Prevention)
+    'plugin:vue/essential', // Priority A: Essential (Error Prevention)
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     // 'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    'prettier'
+    'prettier',
   ],
 
   plugins: [
@@ -74,7 +75,7 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
 
     // TypeScript
-    quotes: ['warn', 'single', { avoidEscape: true }],
+    // quotes: ['warn', 'single', { avoidEscape: true }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 

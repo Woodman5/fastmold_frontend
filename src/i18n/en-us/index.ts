@@ -27,5 +27,6 @@ export default {
   color: 'Color | Colors | Colors',
   grid: 'Grid | Grids',
   list: 'List | Lists',
-  simpleColors: 'Common colors'
+  simpleColors: 'Common colors',
+  orders: 'Orders'
 };
