@@ -291,9 +291,9 @@ export default defineComponent({
             if (this.isUserLoggedIn) {
                 return [
                     { name: 'orders', icon: 'bookmark_border', url: '/orders' },
-                    { name: 'New ad', icon: 'note_add', url: '/new' },
-                    { name: 'My ads', icon: 'list', url: '/list' },
-                    { name: 'My info', icon: 'person', url: '/user' },
+                    // { name: 'New ad', icon: 'note_add', url: '/new' },
+                    // { name: 'My ads', icon: 'list', url: '/list' },
+                    // { name: 'My info', icon: 'person', url: '/user' },
                 ]
             }
             return [

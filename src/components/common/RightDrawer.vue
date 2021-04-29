@@ -4,7 +4,7 @@
         <div class="q-pa-md q-gutter-sm">
             <q-tree
                 :nodes="links"
-                node-key="label"
+                node-key="id"
                 default-expand-all
                 color="amber"
                 no-connectors
@@ -13,11 +13,22 @@
                 ref="qtree"
             />
         </div>
+        <select v-model="$i18n.locale">
+            <option
+                v-for="locale in $i18n.availableLocales"
+                :key="`locale-${locale}`"
+                :value="locale"
+            >
+                {{ locale }}
+            </option>
+        </select>
+        <p>{{ $t('data_management') }}</p>
     </q-scroll-area>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import { i18n } from 'boot/i18n'
 
 interface Node<Type> {
     children: Type[]
@@ -48,45 +59,51 @@ export default defineComponent({
             selected: null as null | string,
             links: [
                 {
-                    label: 'Администрирование данных',
+                    label: this.$t('data_management'),
+                    id: 1,
                     children: [
                         {
-                            label: 'Пользователи',
+                            label: this.$t('users'),
+                            id: 2,
                             icon: 'lar la-user',
                             iconColor: 'amber',
                             expandable: true,
                             children: [
                                 {
                                     label: this.$t('orders'),
+                                    id: 3,
                                     url: '/orders',
                                     children: [],
                                     icon: 'arrow_forward',
-                                    iconColor: 'white',
+                                    iconColor: 'amber-2',
                                 },
                                 {
                                     label: 'Good recipe',
+                                    id: 4,
                                     children: [],
-                                    icon: 'arrow_forward',
-                                    iconColor: 'white',
+                                    icon: 'arrow_right_alt',
+                                    iconColor: 'amber-2',
                                 },
                             ],
                         },
                         {
                             label: 'Материалы',
+                            id: 5,
                             icon: 'las la-shapes',
                             iconColor: 'amber',
                             children: [
-                                { label: 'Prompt', children: [] },
-                                { label: 'Professional', children: [] },
+                                { label: 'Prompt', children: [], id: 6 },
+                                { label: 'Professional', children: [], id: 7 },
                             ],
                         },
                         {
                             label: 'Технологии',
+                            id: 8,
                             icon: 'las la-industry',
                             iconColor: 'amber',
                             children: [
-                                { label: 'Attention', children: [] },
-                                { label: 'Waiter', children: [] },
+                                { label: 'Attention', children: [], id: 9 },
+                                { label: 'Waiter', children: [], id: 10 },
                             ],
                         },
                     ],
@@ -120,11 +137,4 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="sass">
-
-div.q-tree__node--disabled
-  >>> div.q-tree__node-header-content
-    >>> div
-      font-family: nunito-font
-      color: #ffc107 !important
-</style>
+<style scoped lang="sass"></style>
