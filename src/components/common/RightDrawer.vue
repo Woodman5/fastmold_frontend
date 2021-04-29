@@ -1,109 +1,123 @@
 // eslint-disable-next-line vue/no-v-model-argument
 <template v-slot:right-drawer>
-  <q-scroll-area class="fit">
-    <div class="q-pa-md q-gutter-sm">
-      <q-tree
-        :nodes="links"
-        node-key="label"
-        default-expand-all
-        color="amber"
-        no-connectors
-        v-model:selected="selected"
-        @update:selected="selectedHandler"
-        ref="qtree"
-      />
-    </div>
-  </q-scroll-area>
+    <q-scroll-area class="fit">
+        <div class="q-pa-md q-gutter-sm">
+            <q-tree
+                :nodes="links"
+                node-key="label"
+                default-expand-all
+                color="amber"
+                no-connectors
+                v-model:selected="selected"
+                @update:selected="selectedHandler"
+                ref="qtree"
+            />
+        </div>
+    </q-scroll-area>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
 interface Node<Type> {
-  children: Type[];
-  label?: string;
-  url?: string;
-  disabled?: boolean;
+    children: Type[]
+    label?: string
+    url?: string
+    disabled?: boolean
+    selectable?: boolean
+    icon?: string
+    iconColor?: string
 }
 
 interface getFromQTree {
-  getNodeByKey: (key: string) => Node<string>;
-  getTickedNodes: () => string[];
-  getExpandedNodes: () => string[];
-  isExpanded: (key: string) => boolean;
-  expandAll: () => void;
-  collapseAll: () => void;
-  setExpanded: (key: string, state: boolean) => void;
-  isTicked: (key: string) => boolean;
-  setTicked: (keys: string[], state: boolean) => void;
+    getNodeByKey: (key: string) => Node<string>
+    getTickedNodes: () => string[]
+    getExpandedNodes: () => string[]
+    isExpanded: (key: string) => boolean
+    expandAll: () => void
+    collapseAll: () => void
+    setExpanded: (key: string, state: boolean) => void
+    isTicked: (key: string) => boolean
+    setTicked: (keys: string[], state: boolean) => void
 }
 
 export default defineComponent({
-  name: "RightDrawer",
-  data: function () {
-    return {
-      selected: null as null | string,
-      links: [
-        {
-          label: "Администрирование данных",
-          children: [
-            {
-              label: "Пользователи",
-              icon: "lar la-user",
-              iconColor: "amber",
-              expandable: true,
-              children: [
+    name: 'RightDrawer',
+    data: function () {
+        return {
+            selected: null as null | string,
+            links: [
                 {
-                  label: this.$t("orders"),
-                  url: "/orders",
-                  children: [],
+                    label: 'Администрирование данных',
+                    children: [
+                        {
+                            label: 'Пользователи',
+                            icon: 'lar la-user',
+                            iconColor: 'amber',
+                            expandable: true,
+                            children: [
+                                {
+                                    label: this.$t('orders'),
+                                    url: '/orders',
+                                    children: [],
+                                    icon: 'arrow_forward',
+                                    iconColor: 'white',
+                                },
+                                {
+                                    label: 'Good recipe',
+                                    children: [],
+                                    icon: 'arrow_forward',
+                                    iconColor: 'white',
+                                },
+                            ],
+                        },
+                        {
+                            label: 'Материалы',
+                            icon: 'las la-shapes',
+                            iconColor: 'amber',
+                            children: [
+                                { label: 'Prompt', children: [] },
+                                { label: 'Professional', children: [] },
+                            ],
+                        },
+                        {
+                            label: 'Технологии',
+                            icon: 'las la-industry',
+                            iconColor: 'amber',
+                            children: [
+                                { label: 'Attention', children: [] },
+                                { label: 'Waiter', children: [] },
+                            ],
+                        },
+                    ],
                 },
-                { label: "Good recipe", children: [] },
-              ],
-            },
-            {
-              label: "Материалы",
-              icon: "las la-shapes",
-              iconColor: "amber",
-              children: [
-                { label: "Prompt", children: [] },
-                { label: "Professional", children: [] },
-              ],
-            },
-            {
-              label: "Технологии",
-              icon: "las la-industry",
-              iconColor: "amber",
-              children: [
-                { label: "Attention", children: [] },
-                { label: "Waiter", children: [] },
-              ],
-            },
-          ],
-        },
-      ],
-    };
-  },
-  methods: {
-    selectedHandler(target: string) {
-      if (target === null) return;
-      const myQtree = this.$refs.qtree as getFromQTree;
-      const node = myQtree.getNodeByKey(target);
-      if (node.children.length > 0) {
-        myQtree.setExpanded(target, !myQtree.isExpanded(target));
-        this.selected = "";
-      } else if (node.url) {
-        this.$router
-          .push(node.url)
-          .finally(() => {
-            console.log(this.$router.currentRoute.value);
-            node.disabled = true;
-          })
-          .catch((error) => console.log(error));
-      }
+            ],
+        }
     },
-  },
-});
+    methods: {
+        selectedHandler(target: string) {
+            if (target === null) return
+            console.log('Target -', target)
+            const myQtree = this.$refs.qtree as getFromQTree
+            const node = myQtree.getNodeByKey(target)
+            if (node.children.length > 0) {
+                myQtree.setExpanded(target, !myQtree.isExpanded(target))
+                this.selected = ''
+            } else if (node.url) {
+                this.$router
+                    .push(node.url)
+                    .finally(() => {
+                        console.log(this.$router.currentRoute.value)
+                        console.log(this.selected)
+                        node.selectable = false
+                        node.icon = 'arrow_right_alt'
+                        node.iconColor = 'red'
+                    })
+                    .catch((error) => console.log(error))
+            }
+        },
+    },
+})
 </script>
 
 <style scoped lang="sass">
