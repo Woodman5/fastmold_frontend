@@ -13,22 +13,13 @@
                 ref="qtree"
             />
         </div>
-        <select v-model="$i18n.locale">
-            <option
-                v-for="locale in $i18n.availableLocales"
-                :key="`locale-${locale}`"
-                :value="locale"
-            >
-                {{ locale }}
-            </option>
-        </select>
-        <p>{{ $t('data_management') }}</p>
+        <langSwitcher></langSwitcher>
     </q-scroll-area>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { i18n } from 'boot/i18n'
+import langSwitcher from 'components/common/langSwitcher.vue'
 
 interface Node<Type> {
     children: Type[]
@@ -54,63 +45,17 @@ interface getFromQTree {
 
 export default defineComponent({
     name: 'RightDrawer',
-    data: function () {
+    props: {
+        nodes: Array,
+    },
+    setup(props) {
+        const selected = ''
         return {
-            selected: null as null | string,
-            links: [
-                {
-                    label: this.$t('data_management'),
-                    id: 1,
-                    children: [
-                        {
-                            label: this.$t('users'),
-                            id: 2,
-                            icon: 'lar la-user',
-                            iconColor: 'amber',
-                            expandable: true,
-                            children: [
-                                {
-                                    label: this.$t('orders'),
-                                    id: 3,
-                                    url: '/orders',
-                                    children: [],
-                                    icon: 'arrow_forward',
-                                    iconColor: 'amber-2',
-                                },
-                                {
-                                    label: 'Good recipe',
-                                    id: 4,
-                                    children: [],
-                                    icon: 'arrow_right_alt',
-                                    iconColor: 'amber-2',
-                                },
-                            ],
-                        },
-                        {
-                            label: 'Материалы',
-                            id: 5,
-                            icon: 'las la-shapes',
-                            iconColor: 'amber',
-                            children: [
-                                { label: 'Prompt', children: [], id: 6 },
-                                { label: 'Professional', children: [], id: 7 },
-                            ],
-                        },
-                        {
-                            label: 'Технологии',
-                            id: 8,
-                            icon: 'las la-industry',
-                            iconColor: 'amber',
-                            children: [
-                                { label: 'Attention', children: [], id: 9 },
-                                { label: 'Waiter', children: [], id: 10 },
-                            ],
-                        },
-                    ],
-                },
-            ],
+            links: props.nodes,
+            selected,
         }
     },
+
     methods: {
         selectedHandler(target: string) {
             if (target === null) return

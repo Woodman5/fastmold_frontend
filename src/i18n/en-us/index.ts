@@ -30,4 +30,5 @@ export default {
     simpleColors: 'Common colors',
     orders: 'Orders',
     data_management: 'Data management',
+    users: 'Users',
 }

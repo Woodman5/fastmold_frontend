@@ -26,7 +26,7 @@
                         flat
                         v-for="link in links"
                         :key="link.name"
-                        :label="$t(link.name)"
+                        :label="t(link.name)"
                         :icon="link.icon"
                         :to="link.url"
                     >
@@ -135,15 +135,7 @@
             :width="240"
             :breakpoint="1060"
         >
-            <select v-model="$i18n.locale">
-                <option
-                    v-for="locale in $i18n.availableLocales"
-                    :key="`locale-${locale}`"
-                    :value="locale"
-                >
-                    {{ locale }}
-                </option>
-            </select>
+            <langSwitcher></langSwitcher>
 
             <q-scroll-area class="fit">
                 <q-list padding class="text-grey-8">
@@ -158,7 +150,7 @@
                             <q-icon :name="link.icon" />
                         </q-item-section>
                         <q-item-section>
-                            <q-item-label>{{ $t(link.name) }}</q-item-label>
+                            <q-item-label>{{ t(link.name) }}</q-item-label>
                         </q-item-section>
                     </q-item>
                 </q-list>
@@ -173,7 +165,10 @@
             :width="280"
             :breakpoint="1060"
         >
-            <RightDrawer></RightDrawer>
+            <!-- <RightDrawer
+                :nodes="nodes"
+                v-bind:refresh-token="refreshToken"
+            ></RightDrawer> -->
 
             <div class="absolute" style="top: 10px; left: -13px">
                 <q-btn
@@ -190,6 +185,8 @@
         </q-drawer>
 
         <q-page-container>
+            <button @click="rebuild">Go</button>
+
             <router-view></router-view>
 
             <div class="absolute" style="top: 60px; right: 10px">
@@ -209,31 +206,112 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 // import { mapGetters } from "vuex";
 import RightDrawer from 'components/common/RightDrawer.vue'
+import langSwitcher from 'components/common/langSwitcher.vue'
 // import { User } from "src/store/user/types";
+import messages from 'src/i18n'
+import { i18n } from 'src/boot/i18n'
+import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
-    components: { RightDrawer },
-    data: function () {
-        return {
-            left: false,
-            right: true,
-            text: 'test',
-            isUserLoggedIn: true,
-            user: {
-                name: 'yury',
-                email: 'test@test.com',
-                role: 'Admin',
+    components: { RightDrawer, langSwitcher },
+    setup() {
+        const { t, locale } = useI18n({ i18n })
+        const phrase1 = ref(t('data_management'))
+        const testStr1 = t('data_management')
+        const left = true
+        const right = true
+        const text = 'test'
+        const isUserLoggedIn = true
+        const refreshToken = 1
+        const user = {
+            name: 'yury',
+            email: 'test@test.com',
+            role: 'Admin',
+        }
+        const langs = [
+            { value: 'en-US', label: 'En', name: 'English' },
+            { value: 'ru-RU', label: 'Ru', name: 'Русский' },
+        ]
+        const nodes = [
+            {
+                label: t('data_management'),
+                id: 1,
+                children: [
+                    {
+                        label: t('users'),
+                        id: 2,
+                        icon: 'lar la-user',
+                        iconColor: 'amber',
+                        expandable: true,
+                        children: [
+                            {
+                                label: t('orders'),
+                                id: 3,
+                                url: '/orders',
+                                children: [],
+                                icon: 'arrow_forward',
+                                iconColor: 'amber-2',
+                            },
+                            {
+                                label: 'Good recipe',
+                                id: 4,
+                                children: [],
+                                icon: 'arrow_right_alt',
+                                iconColor: 'amber-2',
+                            },
+                        ],
+                    },
+                    {
+                        label: 'Материалы',
+                        id: 5,
+                        icon: 'las la-shapes',
+                        iconColor: 'amber',
+                        children: [
+                            { label: 'Prompt', children: [], id: 6 },
+                            { label: 'Professional', children: [], id: 7 },
+                        ],
+                    },
+                    {
+                        label: 'Технологии',
+                        id: 8,
+                        icon: 'las la-industry',
+                        iconColor: 'amber',
+                        children: [
+                            { label: 'Attention', children: [], id: 9 },
+                            { label: 'Waiter', children: [], id: 10 },
+                        ],
+                    },
+                ],
             },
-            langs: [
-                { value: 'en-US', label: 'En', name: 'English' },
-                { value: 'ru-RU', label: 'Ru', name: 'Русский' },
-            ],
+        ]
+
+        return {
+            phrase1,
+            left,
+            right,
+            text,
+            isUserLoggedIn,
+            refreshToken,
+            user,
+            langs,
+            nodes,
+            t,
+            testStr1,
+            locale,
         }
     },
+
     methods: {
+        rebuild() {
+            this.refreshToken++
+            console.log(this.refreshToken)
+            console.log(this.nodes[0].label)
+            console.log(this.phrase1)
+            console.log(this.testStr1)
+        },
         gotourl(url: string) {
             document.location.href = url
         },
@@ -267,8 +345,8 @@ export default defineComponent({
         // }),
         langLabel(): string {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            return this.langs.find((lang) => lang.value === this.$i18n.locale)!
-                .label
+            // return this.langs.find((lang) => lang.value === this.$i18n.locale)!.label
+            return 'W'
         },
         // user(): User | null {
         //   return this.$store.getters["userProfile/user"];
