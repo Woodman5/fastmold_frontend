@@ -165,10 +165,7 @@
             :width="280"
             :breakpoint="1060"
         >
-            <!-- <RightDrawer
-                :nodes="nodes"
-                v-bind:refresh-token="refreshToken"
-            ></RightDrawer> -->
+            <RightDrawer></RightDrawer>
 
             <div class="absolute" style="top: 10px; left: -13px">
                 <q-btn
@@ -206,7 +203,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 // import { mapGetters } from "vuex";
 import RightDrawer from 'components/common/RightDrawer.vue'
 import langSwitcher from 'components/common/langSwitcher.vue'
@@ -218,9 +215,9 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
     components: { RightDrawer, langSwitcher },
     setup() {
-        const { t, locale } = useI18n({ i18n })
+        const { t, locale } = useI18n()
         const phrase1 = ref(t('data_management'))
-        const testStr1 = t('data_management')
+        const testStr1 = computed(() => t('data_management'))
         const left = true
         const right = true
         const text = 'test'
@@ -235,58 +232,6 @@ export default defineComponent({
             { value: 'en-US', label: 'En', name: 'English' },
             { value: 'ru-RU', label: 'Ru', name: 'Русский' },
         ]
-        const nodes = [
-            {
-                label: t('data_management'),
-                id: 1,
-                children: [
-                    {
-                        label: t('users'),
-                        id: 2,
-                        icon: 'lar la-user',
-                        iconColor: 'amber',
-                        expandable: true,
-                        children: [
-                            {
-                                label: t('orders'),
-                                id: 3,
-                                url: '/orders',
-                                children: [],
-                                icon: 'arrow_forward',
-                                iconColor: 'amber-2',
-                            },
-                            {
-                                label: 'Good recipe',
-                                id: 4,
-                                children: [],
-                                icon: 'arrow_right_alt',
-                                iconColor: 'amber-2',
-                            },
-                        ],
-                    },
-                    {
-                        label: 'Материалы',
-                        id: 5,
-                        icon: 'las la-shapes',
-                        iconColor: 'amber',
-                        children: [
-                            { label: 'Prompt', children: [], id: 6 },
-                            { label: 'Professional', children: [], id: 7 },
-                        ],
-                    },
-                    {
-                        label: 'Технологии',
-                        id: 8,
-                        icon: 'las la-industry',
-                        iconColor: 'amber',
-                        children: [
-                            { label: 'Attention', children: [], id: 9 },
-                            { label: 'Waiter', children: [], id: 10 },
-                        ],
-                    },
-                ],
-            },
-        ]
 
         return {
             phrase1,
@@ -297,7 +242,6 @@ export default defineComponent({
             refreshToken,
             user,
             langs,
-            nodes,
             t,
             testStr1,
             locale,
@@ -308,9 +252,10 @@ export default defineComponent({
         rebuild() {
             this.refreshToken++
             console.log(this.refreshToken)
-            console.log(this.nodes[0].label)
             console.log(this.phrase1)
             console.log(this.testStr1)
+            let f = this.t('users')
+            console.log('f-', f)
         },
         gotourl(url: string) {
             document.location.href = url

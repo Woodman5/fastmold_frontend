@@ -24,8 +24,8 @@ export default {
 
         watch(lang, (val) => {
             locale.value = val
-            console.log(i18n.global.availableLocales)
-            console.log(i18n.global.messages)
+            // console.log(i18n.global.availableLocales)
+            // console.log(i18n.global.messages)
         })
 
         return {
