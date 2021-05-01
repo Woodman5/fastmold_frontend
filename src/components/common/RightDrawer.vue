@@ -12,14 +12,12 @@
                 ref="qtree"
             />
         </div>
-        <langSwitcher></langSwitcher>
     </q-scroll-area>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import langSwitcher from 'components/common/langSwitcher.vue'
 
 //@update:selected="selectedHandler"
 
@@ -47,7 +45,6 @@ interface getFromQTree {
 
 export default defineComponent({
     name: 'RightDrawer',
-    components: { langSwitcher },
     setup() {
         const selected = ref('')
         const { t, locale } = useI18n()

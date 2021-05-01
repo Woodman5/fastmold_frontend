@@ -32,30 +32,7 @@
                     >
                     </q-btn>
 
-                    <q-btn-dropdown
-                        class="gt-sm nunito-font"
-                        flat
-                        icon="fas fa-globe"
-                        :label="langLabel"
-                    >
-                        <q-list class="nunito-font">
-                            <q-item
-                                clickable
-                                v-close-popup
-                                @click="changeLang(lang.value)"
-                                v-for="lang in langs"
-                                :key="lang.value"
-                                :class="{
-                                    'q-item--active':
-                                        $i18n.locale === lang.value,
-                                }"
-                            >
-                                <q-item-section>
-                                    <q-item-label>{{ lang.name }}</q-item-label>
-                                </q-item-section>
-                            </q-item>
-                        </q-list>
-                    </q-btn-dropdown>
+                    <langSwitcher></langSwitcher>
 
                     <q-btn-dropdown
                         class="gt-sm"
@@ -135,8 +112,6 @@
             :width="240"
             :breakpoint="1060"
         >
-            <langSwitcher></langSwitcher>
-
             <q-scroll-area class="fit">
                 <q-list padding class="text-grey-8">
                     <q-item
