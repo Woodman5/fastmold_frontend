@@ -24,11 +24,9 @@
     </q-btn-dropdown>
 </template>
 
-<script>
-//@click="changeLang(lang.value)"
+<script lang="ts">
 import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { i18n } from 'src/boot/i18n'
 
 export default {
     setup() {
@@ -41,12 +39,14 @@ export default {
 
         watch(lang, (val) => {
             locale.value = val
-            console.log(lang.value)
-            // console.log(i18n.global.messages)
         })
-        const langLabel = computed(
-            () => langOptions.find((item) => item.value === lang.value).label
-        )
+
+        const langLabel = computed(() => {
+            let a = langOptions.find((item) => item.value === lang.value)
+            if (a) {
+                return a.label
+            }
+        })
 
         return {
             lang,

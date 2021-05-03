@@ -42,12 +42,13 @@
                         v-if="isUserLoggedIn"
                     >
                         <template v-slot:label>
-                            <q-avatar color="white" text-color="primary">{{
-                                user.name[0]
-                            }}</q-avatar>
+                            <q-avatar color="white" text-color="primary">
+                                {{ user.name[0] }}
+                            </q-avatar>
                         </template>
 
-                        <q-list>
+                        <q-list
+                            >l
                             <q-item>
                                 <q-item-section>
                                     <q-item-label>{{ user.name }}</q-item-label>
@@ -157,8 +158,6 @@
         </q-drawer>
 
         <q-page-container>
-            <button @click="rebuild">Go</button>
-
             <router-view></router-view>
 
             <div class="absolute" style="top: 60px; right: 10px">
@@ -182,22 +181,15 @@ import { defineComponent, ref, computed } from 'vue'
 // import { mapGetters } from "vuex";
 import RightDrawer from 'components/common/RightDrawer.vue'
 import langSwitcher from 'components/common/langSwitcher.vue'
-// import { User } from "src/store/user/types";
-import messages from 'src/i18n'
-import { i18n } from 'src/boot/i18n'
 import { useI18n } from 'vue-i18n'
 
 export default defineComponent({
     components: { RightDrawer, langSwitcher },
     setup() {
         const { t, locale } = useI18n()
-        const phrase1 = ref(t('data_management'))
-        const testStr1 = computed(() => t('data_management'))
-        const left = true
-        const right = true
-        const text = 'test'
-        const isUserLoggedIn = true
-        const refreshToken = 1
+        const left = ref(true)
+        const right = ref(true)
+        const isUserLoggedIn = ref(true)
         const user = {
             name: 'yury',
             email: 'test@test.com',
@@ -209,35 +201,19 @@ export default defineComponent({
         ]
 
         return {
-            phrase1,
             left,
             right,
-            text,
             isUserLoggedIn,
-            refreshToken,
             user,
             langs,
             t,
-            testStr1,
             locale,
         }
     },
 
     methods: {
-        rebuild() {
-            this.refreshToken++
-            console.log(this.refreshToken)
-            console.log(this.phrase1)
-            console.log(this.testStr1)
-            let f = this.t('users')
-            console.log('f-', f)
-        },
         gotourl(url: string) {
             document.location.href = url
-        },
-        changeLang(lang: string) {
-            console.log(this.$i18n)
-            this.$i18n.locale = lang
         },
         async onLogout() {
             await this.$store
@@ -263,11 +239,6 @@ export default defineComponent({
         //   user: "userProfile/user",
         //   //isUserLoggedIn: 'userProfile/check'
         // }),
-        langLabel(): string {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            // return this.langs.find((lang) => lang.value === this.$i18n.locale)!.label
-            return 'W'
-        },
         // user(): User | null {
         //   return this.$store.getters["userProfile/user"];
         // },
