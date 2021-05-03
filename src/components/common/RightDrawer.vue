@@ -22,7 +22,7 @@
 import { defineComponent, ref, computed, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import menuAdmin from 'src/assets/menuAdmin'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 interface Node<Type> {
     children: Type[]
@@ -53,7 +53,6 @@ export default defineComponent({
         const { t, locale } = useI18n()
         const qtree = ref(null)
         const router = useRouter()
-        const route = useRoute()
 
         const nodes = computed(() => {
             let nodesArray = menuAdmin()
@@ -92,11 +91,6 @@ export default defineComponent({
                     .catch((error) => console.log(error))
             }
         }
-
-        //     }
-        //
-        //     }
-        // }
 
         return {
             selected,

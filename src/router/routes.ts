@@ -47,10 +47,9 @@ const routes: RouteRecordRaw[] = [
                 name: 'userinfo',
             }, //, beforeEnter: AuthGuard },
             {
-                path: '/materials',
-                component: () =>
-                    import('components/materials/MaterialsList.vue'),
-                name: 'materials',
+                path: '/api/v1/handbook/colors',
+                component: () => import('components/materials/colorsList.vue'),
+                name: 'colors',
             }, //, beforeEnter: GuestGuard },
         ],
     },

@@ -1,15 +1,11 @@
 import { store } from 'quasar/wrappers'
 import { InjectionKey } from 'vue'
-import {
-  createStore,
-  Store as VuexStore,
-  useStore as vuexUseStore,
-} from 'vuex'
+import { createStore, Store as VuexStore, useStore as vuexUseStore } from 'vuex'
 
-import { RootState, Color } from './types';
-import ads from './ads/ads';
-import shared from './shared/shared';
-import userProfile from './user/index';
+import { RootState, Color } from './types'
+import ads from './ads/ads'
+import shared from './shared/shared'
+import userProfile from './user/index'
 
 //Moking data for pages
 import hdsc from 'src/assets/hardscales'
@@ -19,9 +15,6 @@ import materials from 'src/assets/mats'
 const hardScales = hdsc()
 const allcolors = colors()
 const allmaterials = materials()
-
-// console.log(allcolors)
-// console.log(allmaterials)
 
 // import example from './module-example';
 // import { ExampleStateInterface } from './module-example/state.ts';
@@ -37,33 +30,38 @@ const allmaterials = materials()
 
 // provide typings for `this.$store`
 declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $store: VuexStore<RootState>
-  }
+    interface ComponentCustomProperties {
+        $store: VuexStore<RootState>
+    }
 }
 
 // provide typings for `useStore` helper
 export const storeKey: InjectionKey<VuexStore<RootState>> = Symbol('vuex-key')
 
+export default store(function (/* { ssrContext } */) {
+    const Store = createStore<RootState>({
+        state: {
+            version: '1.0.0', // a simple property
+            hardScales: hardScales,
+            colors: allcolors,
+            materials: allmaterials,
+        },
+        modules: {
+            // example
+            // userProfile,
+            // ads,
+        },
 
-export default store (function (/* { ssrContext } */) {
-  const Store = createStore<RootState>({
-    modules: {
-      // example
-      // userProfile,
-      // ads,
-    },
+        // enable strict mode (adds overhead!)
+        // for dev mode and --debug builds only
+        strict: !!process.env.DEBUGGING,
+    })
 
-    // enable strict mode (adds overhead!)
-    // for dev mode and --debug builds only
-    strict: !!process.env.DEBUGGING
-  })
-
-  return Store
+    return Store
 })
 
 export function useStore() {
-  return vuexUseStore(storeKey)
+    return vuexUseStore(storeKey)
 }
 
 /*export default store(({ Vue }) => {
@@ -88,4 +86,3 @@ export function useStore() {
   });
   return Store;
 });*/
-

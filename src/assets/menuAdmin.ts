@@ -132,7 +132,7 @@ function menuAdmin() {
                 {
                     label: 'color',
                     id: 37,
-                    url: '/api/v1/handbook/colors/pages',
+                    url: '/api/v1/handbook/colors',
                     children: [],
                     icon: 'arrow_right_alt',
                     iconColor: 'amber-2',
