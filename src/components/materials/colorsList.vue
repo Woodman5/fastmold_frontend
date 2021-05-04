@@ -240,13 +240,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, ComputedRef } from 'vue'
-import { Color, Material, HardScale } from 'src/store/types'
+import { defineComponent, ref, computed } from 'vue'
+import { Color } from 'src/store/types'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'src/store'
 
 export default defineComponent({
-    name: 'MaterialsList',
+    name: 'ColorsList',
     setup() {
         // eslint-disable-next-line @typescript-eslint/unbound-method
         const { t, locale } = useI18n()
@@ -256,9 +256,6 @@ export default defineComponent({
         const innerTab = ref('1000')
         const innerTab2 = ref('N')
         const splitterModel = ref(20)
-        // const colors = store.state.colors as Color[]
-        // const hardScales = store.state.hardScales as HardScale[]
-        // const materials = store.state.materials as Material[]
         const ralNames = [
             [0, '1000'],
             [1, '2000'],

@@ -46,6 +46,7 @@ export default {
             if (a) {
                 return a.label
             }
+            return ''
         })
 
         return {

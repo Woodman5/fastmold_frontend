@@ -47,9 +47,79 @@ const routes: RouteRecordRaw[] = [
                 name: 'userinfo',
             }, //, beforeEnter: AuthGuard },
             {
-                path: '/api/v1/handbook/colors',
+                path: '/colors',
                 component: () => import('components/materials/colorsList.vue'),
                 name: 'colors',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/roles',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'roles',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/users',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'users',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/hardness-scales',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'hardness-scales',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/common-hardness',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'common-hardness',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/material-types',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'material-types',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/imitation-materials',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'imitation-materials',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/chemical-resistance',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'chemical-resistance',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/companies',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'companies',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/tool-classes',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'tool-classes',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/tool-types',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'tool-types',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/technology-types',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'technology-types',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/technology',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'technology',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/measuring-standarts',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'measuring-standarts',
+            }, //, beforeEnter: GuestGuard },
+            {
+                path: '/statuses',
+                component: () => import('components/common/blankPage.vue'),
+                name: 'statuses',
             }, //, beforeEnter: GuestGuard },
         ],
     },
