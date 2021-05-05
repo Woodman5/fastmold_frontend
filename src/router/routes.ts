@@ -63,7 +63,7 @@ const routes: RouteRecordRaw[] = [
             }, //, beforeEnter: GuestGuard },
             {
                 path: '/hardness-scales',
-                component: () => import('components/common/blankPage.vue'),
+                component: () => import('components/materials/hardScales.vue'),
                 name: 'hardness-scales',
             }, //, beforeEnter: GuestGuard },
             {
